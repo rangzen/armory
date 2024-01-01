@@ -1,6 +1,6 @@
 acc = .5 -- acceleration
 fri = .1 -- friction
-min_time_between_damage = 20 -- minimum time between damage on the player
+min_time_between_damage = 15 -- minimum time between damage on the player
 
 function init_player()
   plr = {

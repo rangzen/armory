@@ -1,6 +1,6 @@
 function _init()
   paused = true
-  can_unpause_at = time() + 2
+  can_unpause_at = time()
 
   init_player()
 
@@ -65,17 +65,15 @@ function _draw()
 
   if paused then
     if time() > can_unpause_at then
-      print("press any button to start", 12, 8, 7)
+      print("press any button to start", 12, 63, 7)
     end
     -- already a previous game?
     if party_time != nil and party_time > 0 then
-      print("time: " .. party_time, 12, 32, 7)
-      print("kills: " .. kills, 12, 40, 7)
+      draw_timer()
+      draw_kills()
     end
     return
   end
-
-  print("time: " .. party_time, 0, 0, 7)
 
   draw_mines()
 
@@ -84,6 +82,9 @@ function _draw()
   draw_bullets()
 
   draw_enemies()
+
+  draw_timer()
+  draw_kills()
 
   if debug then
     -- print(plr.x .. ", " .. plr.y, 0, 8, 7)
