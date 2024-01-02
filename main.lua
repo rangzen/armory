@@ -1,15 +1,6 @@
 function _init()
   paused = true
   can_unpause_at = time()
-
-  init_player()
-
-  blts = {}
-  -- bullets
-  mines = {}
-  -- mines
-  enms = {}
-  -- enemies
 end
 
 function _update()
@@ -18,10 +9,7 @@ function _update()
     -- start the game if any button is pressed
     if time() > can_unpause_at
         and (btnp(0) or btnp(1) or btnp(2) or btnp(3) or btnp(4) or btnp(5)) then
-      party_time = 0
-      last_damage_time = party_time + 3 * 30 -- can't be damaged the first 3 seconds
-      kills = 0
-      paused = false
+      start()
     end
     return
   else
@@ -60,17 +48,19 @@ function _update()
 end
 
 function _draw()
-  cls(5)
+  cls()
   map(0)
 
   if paused then
-    if time() > can_unpause_at then
-      print("press any button to start", 12, 63, 7)
-    end
     -- already a previous game?
     if party_time != nil and party_time > 0 then
       draw_timer()
       draw_kills()
+      -- draw the player dead
+      spr(3, plr.x-4, plr.y-4)
+    end
+    if time() > can_unpause_at then
+      print("press any button to start", 12, 63, 7)
     end
     return
   end
@@ -94,4 +84,29 @@ function _draw()
     -- print(plr.mwp.damage, 0, 40, 7)
     -- print(main_weapons[1].damage, 0, 48, 7)
   end
+end
+
+function start()
+  party_time = 0
+
+  last_damage_time = party_time + 3 * 30
+  -- can't be damaged the first 3 seconds
+  kills = 0
+  init_player()
+  -- bullets
+  blts = {}
+  -- mines
+  mines = {}
+  -- enemies
+  enms = {}
+
+  paused = false
+end
+
+function gameover()
+  paused = true
+
+  sfx(32)
+
+  can_unpause_at = time() + 2
 end

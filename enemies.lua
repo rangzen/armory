@@ -47,8 +47,7 @@ function update_enemies()
       last_damage_time = party_time
       if plr.l <= 0 then
         -- game over
-        _init()
-        can_unpause_at = time() + 2
+        gameover()
       end
     end
 
