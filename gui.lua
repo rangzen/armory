@@ -32,3 +32,15 @@ function draw_kills()
   spr(49, 4, 12)
   print(kills, 13, 13, 7)
 end
+
+-- register a new temporary message
+function new_tmp_msg(msg)
+  tmp_msg = msg
+  tmp_msg_timer = party_time + fps
+end
+
+function draw_tmp_msg()
+  if tmp_msg_timer > party_time then
+    print(tmp_msg, 64 - #tmp_msg * 2, 120, 7)
+  end
+end

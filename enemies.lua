@@ -74,7 +74,7 @@ function draw_enemies()
     spr(e.s, e.x - 4, e.y - 4, 1, 1, e.dx < 0)
 
     -- enemy life
-    if debug then
+    if debug_enabled then
       line(e.x - 4, e.y - 6, e.x + e.l - 5, e.y - 6, life_color(e.l))
     end
   end

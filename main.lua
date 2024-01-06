@@ -1,6 +1,7 @@
 function _init()
   paused = true
   can_unpause_at = time()
+  tmp_msg_timer = 0
 end
 
 function _update()
@@ -45,6 +46,9 @@ function _update()
   increase_enemies_on_time()
   add_enemies()
   update_enemies()
+
+  update_bonus()
+  add_bonus()
 end
 
 function _draw()
@@ -71,12 +75,16 @@ function _draw()
 
   draw_bullets()
 
+  draw_bonus()
+
   draw_enemies()
 
   draw_timer()
   draw_kills()
 
-  if debug then
+  draw_tmp_msg()
+
+  if debug_enabled then
     -- print(plr.x .. ", " .. plr.y, 0, 8, 7)
     -- print(plr.dx .. ", " .. plr.dy, 0, 16, 7)
     print(kills, 0, 24, 7)
@@ -88,6 +96,8 @@ end
 
 function start()
   party_time = 0
+  tmp_msg_timer = 0
+  tmp_msg = nil
 
   last_damage_time = party_time + 3 * 30
   -- can't be damaged the first 3 seconds
@@ -97,6 +107,8 @@ function start()
   blts = {}
   -- mines
   mines = {}
+  -- bonus
+  bonus = {}
   -- enemies
   enms = {}
 
@@ -109,4 +121,10 @@ function gameover()
   sfx(32)
 
   can_unpause_at = time() + 2
+end
+
+function debug(msg)
+  if debug_enabled then
+    printh(party_time .. ":" .. msg, "log.txt")
+  end
 end

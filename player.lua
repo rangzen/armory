@@ -49,7 +49,7 @@ function draw_player()
   line(plr.x - 4, plr.y - 6, plr.x + plr.l - 5, plr.y - 6, life_color(plr.l))
 
   -- player direction
-  if debug then
+  if debug_enabled then
     line(plr.x + 4, plr.y + 4, plr.x + 4 + plr.dx * 8, plr.y + 4 + plr.dy * 8, 7)
   end
 end
