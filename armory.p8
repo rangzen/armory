@@ -7,6 +7,7 @@ __lua__
 #include main.lua
 #include player.lua
 #include weapons.lua
+#include bonus.lua
 #include enemies.lua
 #include gui.lua
 
