@@ -4,9 +4,6 @@ __lua__
 -- Armory
 -- by 0x2D
 
-debug_enabled = false
-fps = 30
-
 #include main.lua
 #include player.lua
 #include weapons.lua

@@ -1,3 +1,6 @@
+debug_enabled = true
+fps = 30
+
 function _init()
   paused = true
   can_unpause_at = time()
