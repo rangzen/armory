@@ -60,11 +60,26 @@ function _draw()
     if party_time != nil and party_time > 0 then
       draw_timer()
       draw_kills()
-      -- draw the player dead
-      spr(3, plr.x-4, plr.y-4)
     end
     if time() > can_unpause_at then
-      print("press any button to start", 12, 63, 7)
+      local text_color = 9
+      local msg_story1 = "you are an armory priest sent"
+      print(msg_story1, 64 - #msg_story1 * 2, 30, text_color)
+      local msg_story2 = "to clear this dangerous area"
+      print(msg_story2, 64 - #msg_story2 * 2, 38, text_color)
+      local msg_story3 = "and put them back to the tomb!"
+      print(msg_story3, 64 - #msg_story3 * 2, 46, text_color)
+      local msg_start = "press any button to start"
+      print(msg_start, 64 - #msg_start * 2, 63, text_color)
+      local msg_prmwpn = "❎:primary weapon"
+      print(msg_prmwpn, 64 - #msg_prmwpn * 2, 79, text_color)
+      local msg_scndwpn = "🅾️:secondary weapon"
+      print(msg_scndwpn, 64 - #msg_scndwpn * 2, 87, text_color)
+    else
+      -- draw the player dead
+      spr(3, plr.x - 4, plr.y - 4)
+      local msg_gameover = "you died"
+      print(msg_gameover, plr.x  - #msg_gameover * 2, plr.y+8, 7)
     end
     return
   end
