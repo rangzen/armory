@@ -98,17 +98,21 @@ end
 function update_mines()
   for m in all(mines) do
     if party_time > m.ttl then
-      for e in all(enms) do
-        if sqrt((m.x - e.x) ^ 2 + (m.y - e.y) ^ 2) < m.radius then
-          e.l -= m.damage
-          if e.l <= 0 then
-            del(enms, e)
-            kills += 1
-          end
-        end
-      end
+      radius_damage_at(m.radius, m.damage, m.x, m.y)
       sfx(1)
       del(mines, m)
+    end
+  end
+end
+
+function radius_damage_at(r, dmg, x, y)
+  for e in all(enms) do
+    if sqrt((x - e.x) ^ 2 + (y - e.y) ^ 2) < r then
+      e.l -= dmg
+      if e.l <= 0 then
+        del(enms, e)
+        kills += 1
+      end
     end
   end
 end

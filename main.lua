@@ -1,4 +1,4 @@
-debug_enabled = true
+debug_enabled = false
 fps = 30
 
 function _init()
@@ -126,6 +126,7 @@ function start()
   -- mines
   mines = {}
   -- bonus
+  init_bonus()
   bonus = {}
   -- enemies
   enms = {}
