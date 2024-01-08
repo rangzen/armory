@@ -21,7 +21,7 @@ secondary_weapons = {
 }
 
 function copy_weapon(wp)
-  out = {}
+  local out = {}
   out.last_shot = wp.cooldown
   for k, v in pairs(wp) do
     out[k] = v
