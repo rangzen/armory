@@ -16,7 +16,7 @@ secondary_weapons = {
     cooldown = 30,
     damage = 5,
     radius = 24,
-    ttl = 2 * 30
+    ttl = 1 * fps
   }
 }
 
@@ -126,7 +126,7 @@ end
 function draw_mines()
   for m in all(mines) do
     circ(m.x, m.y, m.radius, 9)
-    if party_time > m.ttl - 30 then
+    if party_time > m.ttl - fps / 2 then
       spr(60, m.x - 4, m.y - 4)
     else
       spr(59, m.x - 4, m.y - 4)
