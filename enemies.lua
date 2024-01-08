@@ -1,6 +1,33 @@
 nb_enms = 15 -- number of enemies
 increase_enemies_every = 3 * fps -- seconds
 
+enemies_dex = {
+  {
+    name = "ghost",
+    s = 32,
+    h = 6,
+    w = 6,
+    max_spd = .3,
+    l = 2 -- life
+  },
+  {
+    name = "bat",
+    s = 34,
+    h = 6,
+    w = 6,
+    max_spd = .5,
+    l = 1 -- life
+  },
+  {
+    name = "spider",
+    s = 36,
+    h = 6,
+    w = 6,
+    max_spd = .1,
+    l = 5 -- life
+  }
+}
+
 function increase_enemies_on_time()
   if party_time % increase_enemies_every == 0 then
     nb_enms += 1
@@ -22,19 +49,20 @@ function add_enemies()
     startx = 63 + sgn(rnd(1) - .5) * 71
     starty = rnd(128)
   end
-  add(
-    enms, {
-      x = startx,
-      y = starty,
-      s = 32,
-      h = 6,
-      w = 6,
-      dx = 0,
-      dy = 0,
-      max_spd = .3,
-      l = 2 -- life
-    }
-  )
+  local e = copy_enemy(enemies_dex[flr(rnd(#enemies_dex)) + 1])
+  e.x = startx
+  e.y = starty
+  e.dx = 0
+  e.dy = 0
+  add(enms, e)
+end
+
+function copy_enemy(e)
+  local out = {}
+  for k, v in pairs(e) do
+    out[k] = v
+  end
+  return out
 end
 
 function update_enemies()
@@ -70,8 +98,8 @@ end
 function draw_enemies()
   for e in all(enms) do
     -- enemy sprite
-    e.s = 32 + flr(party_time / 10) % 2
-    spr(e.s, e.x - 4, e.y - 4, 1, 1, e.dx < 0)
+    local s = e.s + flr(party_time / 10) % 2
+    spr(s, e.x - 4, e.y - 4, 1, 1, e.dx < 0)
 
     -- enemy life
     if debug_enabled then
